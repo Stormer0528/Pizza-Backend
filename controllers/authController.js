@@ -238,35 +238,6 @@ module.exports = {
         }
         user.username = username;
       }
-      if (newPassword?.length > 0 && confirmPassword?.length > 0) {
-        if (newPassword !== confirmPassword) {
-          return res.status(400).json({ message: "Passwords don't match!" });
-        }
-        if (user?.email || email) {
-          if (user?.password && user?.password?.length > 0) {
-            if (currentPassword?.length === 0) {
-              return res
-                .status(400)
-                .json({ message: "Please enter your current password!" });
-            }
-            const isMatch = await bcrypt.compare(
-              currentPassword,
-              user?.password
-            );
-            if (!isMatch) {
-              return res
-                .status(400)
-                .json({ message: "Invalid Current Password!" });
-            }
-          }
-          user.password = await bcrypt.hash(newPassword, 10);
-        } else {
-          return res.status(400).json({
-            message:
-              "Please set a email to your account to be able to update your password!",
-          });
-        }
-      }
       if (user?.email && !user?.password) {
         return res.status(400).json({
           message:
