@@ -17,10 +17,6 @@ module.exports = {
         country,
         email,
         phoneNumber,
-        cardName,
-        cardNumber,
-        ccv,
-        expiry,
       } = req.body;
       let existingUser = await User.findById(user);
       if (!existingUser) {
