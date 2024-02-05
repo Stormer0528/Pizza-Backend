@@ -195,13 +195,6 @@ module.exports = {
         });
       }
       let { cartId } = req.cookies;
-      if (!cartId) {
-        return res.status(404).json({ message: "Cart not found" });
-      }
-      const cart = await Cart.findOne({ _id: cartId });
-      if (!cart) {
-        return res.status(404).json({ message: "Cart not found" });
-      }
       return res.json({
         numberOfCartItems: cart?.cartItems?.length,
       });
